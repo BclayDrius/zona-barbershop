@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+@theme {
+  /*
+   * Paleta ZONA BARBER SHOP
+   * Sacada del logo (sello negro con letras blancas desgastadas), del local
+   * (pared negra con líneas blancas geométricas, madera, cromo) y de sus
+   * piezas de Facebook (titulares en oro sobre negro).
+   */
+  --color-ink: #0a0a0a; /* negro del sello — lienzo principal */
+  --color-ink2: #151515; /* tarjetas y superficies elevadas */
+  --color-coal: #1d1d1d; /* secciones alternas */
+  --color-bone: #f2efe8; /* blanco hueso — texto sobre negro */
+  --color-gold: #c9a14a; /* oro — CTAs y highlights */
+  --color-gilt: #e3c77f; /* oro claro — acentos finos, líneas, estrellas */
+  --color-smoke: #a3a09a; /* gris cálido — texto secundario */
+  --color-ok: #57b36a; /* verde "abierto ahora" */
+
+  /* El poste de barbero es sagrado: rojo/azul clásicos */
+  --color-blood: #c63d2f;
+  --color-pole: #1f4a8a;
+
+  /* Tipografías (variables inyectadas por next/font en layout.tsx) */
+  --font-display: var(--font-bebas), "Arial Narrow", sans-serif;
+  --font-body: var(--font-manrope), system-ui, sans-serif;
+  --font-script: var(--font-playfair), Georgia, serif;
+
+  --animate-pole: pole-spin 1.2s linear infinite;
+  --animate-heartbeat: heartbeat 8s ease-in-out infinite;
+  --animate-pulse-dot: pulse-dot 1.6s ease-in-out infinite;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gilt);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Cursor personalizado activo (solo desktop, ver CustomCursor.tsx) */
+body.jb-cursor,
+body.jb-cursor a,
+body.jb-cursor button,
+body.jb-cursor [role="button"],
+body.jb-cursor input,
+body.jb-cursor label {
+  cursor: none;
+}
+
+/* Rayas de poste de barbero (colores clásicos) */
+@utility barber-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-blood) 0 10px,
+    var(--color-bone) 10px 20px,
+    var(--color-pole) 20px 30px,
+    var(--color-bone) 30px 40px
+  );
+}
+
+@utility barber-stripes-animated {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-blood) 0 10px,
+    var(--color-bone) 10px 20px,
+    var(--color-pole) 20px 30px,
+    var(--color-bone) 30px 40px
+  );
+  background-size: 200% 200%;
+  animation: stripes-slide 2.4s linear infinite;
+}
+
+/* Franja dorada (versión sobria del poste, para bordes y CTAs) */
+@utility gold-stripes-animated {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-gold) 0 10px,
+    var(--color-ink) 10px 20px,
+    var(--color-gilt) 20px 30px,
+    var(--color-ink) 30px 40px
+  );
+  background-size: 200% 200%;
+  animation: stripes-slide 2.4s linear infinite;
+}
+
+/* Texto en outline */
+@utility text-stroke-gilt {
+  -webkit-text-stroke: 2px var(--color-gilt);
+  color: transparent;
+}
+
+@utility text-stroke-bone {
+  -webkit-text-stroke: 1.5px var(--color-bone);
+  color: transparent;
+}
+
+/* Oro metálico como en las piezas de Facebook ("AGENDA TU CITA") */
+@utility text-gold-metal {
+  background-image: linear-gradient(
+    180deg,
+    #f6e3a6 0%,
+    #e3c77f 28%,
+    #c9a14a 55%,
+    #9c7630 78%,
+    #d9b864 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gold-metal {
+  background-image: linear-gradient(135deg, #f0d993 0%, #c9a14a 45%, #a17a33 75%, #dcbc6c 100%);
+}
+
+/*
+ * Textura de sello desgastado, como las letras del logo.
+ * Máscara de ruido (feTurbulence) que "come" pequeños puntos del relleno.
+ */
+@utility distressed {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -14 10.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -14 10.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 300px;
+  mask-size: 300px;
+}
+
+/* Pared geométrica del local: líneas blancas cruzadas sobre negro */
+@utility bg-geo {
+  background-image: url("/brand/geo-lines.svg");
+  background-size: 600px 600px;
+}
+
+@keyframes stripes-slide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 56.57px 56.57px;
+  }
+}
+
+@keyframes pole-spin {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: 56.57px;
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  90%,
+  100% {
+    transform: scale(1);
+  }
+  92% {
+    transform: scale(1.12);
+  }
+  94% {
+    transform: scale(1);
+  }
+  96% {
+    transform: scale(1.1);
+  }
+  98% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barber-stripes-animated,
+  .gold-stripes-animated,
+  [class*="animate-"] {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "tool_name": "mcp__claude-in-chrome__browser_batch",
+  "tool_input_preview": "{\"actions\":[{\"tool\":\"computer\",\"args\":{\"action\":\"scroll_to\",\"ref\":\"ref_130\",\"tabId\":388664601}},{\"tool\":\"computer\",\"args\":{\"action\":\"left_click\",\"ref\":\"ref_130\",\"tabId\":388664601,\"action_summary\":\"Exp...",
+  "error": "browser_batch sub-actions must be objects with a string name, and browser_batch cannot be nested.",
+  "timestamp": "2026-11-24T17:23:57.691Z",
+  "retry_count": 1
+}
