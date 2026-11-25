@@ -9,6 +9,7 @@ import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import Script from "next/script";
 
 const bebas = Bebas_Neue({
   weight: "400",
@@ -124,6 +125,7 @@ export default function RootLayout({
         <WhatsAppFloat />
         <GrainOverlay />
         <CustomCursor />
+        <Script src="/showcase.js" strategy="afterInteractive" />
       </body>
     </html>
   );
