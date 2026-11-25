@@ -21,10 +21,10 @@
   const sheet = canAdopt ? new CSSStyleSheet() : null;
   let styleEl = null;
   const baseCSS = `
-  .sc-launch{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:.4em;margin:.35em .6em;padding:.38em .85em;border-radius:999px;
-    font:600 10.5px/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:inherit;opacity:.5;cursor:pointer;
-    box-shadow:inset 0 0 0 1px currentColor;transition:opacity .3s,transform .3s;vertical-align:middle;white-space:nowrap}
-  .sc-launch:hover,.sc-launch:focus-visible{opacity:.95;transform:translateY(-1px)}
+  .sc-launch{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:.45em;min-height:26px;margin:.35em .6em;padding:.3em .9em;border-radius:999px;
+    font:600 10.5px/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:inherit;opacity:1;cursor:pointer;
+    box-shadow:inset 0 0 0 1px currentColor;transition:box-shadow .3s,transform .3s;vertical-align:middle;white-space:nowrap}
+  .sc-launch:hover,.sc-launch:focus-visible{transform:translateY(-1px);box-shadow:inset 0 0 0 1.5px currentColor}
   .sc-launch:focus-visible{outline:2px solid currentColor;outline-offset:3px}
   .sc-launch svg{width:.95em;height:.95em;fill:currentColor}
   .sc-ctrl{position:fixed;right:16px;bottom:16px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;
@@ -66,7 +66,7 @@
     b.type = "button";
     b.className = "sc-launch";
     b.innerHTML = ICON.play + "<span>Showcase</span>";
-    b.setAttribute("aria-label", "Ver recorrido automático de la página (showcase)");
+    b.title = "Ver un recorrido automático por toda la página";
     b.addEventListener("click", () => {
       const u = new URL(location.href);
       u.searchParams.set(PARAM, "1");
