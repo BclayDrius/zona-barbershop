@@ -254,6 +254,7 @@
   const hoverOff = (el) => { el.classList.remove(HOVER); ["pointerout", "pointerleave", "mouseout", "mouseleave"].forEach((t) => fire(el, t)); };
 
   const done = new Set();
+  const clicked = new Set();
   let targets = [];
   const collectTargets = () => {
     const set = new Set();
@@ -285,8 +286,9 @@
       if (!groups.has(g)) groups.set(g, []);
       groups.get(g).push(b);
     });
-    for (const [, btns] of groups) {
-      if (btns.length < 2 || btns.length > 7) continue;
+    for (const [g, btns] of groups) {
+      if (btns.length < 2 || btns.length > 7 || clicked.has(g)) continue;
+      clicked.add(g);
       const isOn = (b) => b.getAttribute("aria-selected") === "true" || b.getAttribute("aria-checked") === "true" || b.getAttribute("aria-pressed") === "true";
       const start = btns.find(isOn) || btns[0];
       for (const b of btns) { if (b === start) continue; check(); b.click(); await sleep(T.click); }
